@@ -1,9 +1,16 @@
 
-LIBFT_A_PATH = ../libft/libft.a
 M_NAME = philo
 
 SRC_MN =	main.c \
-			../parsing/parsing_utils01.c \
+			common_files/ft_utils.c \
+			parsing/parsing_utils01.c \
+			common_files/dll/ft_lst_new.c \
+			common_files/dll/ft_lst_addback.c \
+			common_files/dll/ft_lst_get_end.c \
+			common_files/dll/ft_lst_addfront.c \
+			common_files/dll/ft_lst_utils.c \
+			common_files/ft_initiate.c \
+			common_files/ft_habbits.c
 
 OBJ = $(SRC_MN:.c=.o)
 
@@ -14,7 +21,7 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(M_NAME) 
 
 $(M_NAME) : $(OBJ)
-	$(CC)  $(CFLAGS) $(OBJ) $(LIBFT_A_PATH) -o $(M_NAME)
+	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
 
 %.o:%.c common_files/philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@
