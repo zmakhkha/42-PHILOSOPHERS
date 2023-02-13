@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/12 18:13:46 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:02:40 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_routin(t_philo *p)
 {
 	int	i;
 
-	i = 5;
+	i = p->n_meat;
 	while (i--)
 	{
 		ft_take_fork(p);

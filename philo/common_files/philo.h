@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/12 18:04:47 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:51:00 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct s_philo
 {
 	int					id;
+	int					dead;
 	pthread_t			philo;
 	pthread_mutex_t		r_fork;
 	pthread_mutex_t		pr;
@@ -39,8 +40,24 @@ typedef struct s_philo
 	int					t_think;
 	struct s_philo		*next;
 	struct s_philo		*prev;
+	int					n_philo;
+	unsigned long		s_t;
+	int					n;
+	int					i;
+	char				**v;
+	int					n_meat;
+
 }	t_philo;
 
+typedef struct s_data
+{
+	int				n;
+	char			**v;
+	int				n_philo;
+	int				died;
+	unsigned long	s_t;
+
+}	t_data;
 // philo list utils philo/dll
 void			ft_lstadd_back(t_philo **lst, t_philo *new);
 void			ft_lstadd_front(t_philo **lst, t_philo *new);
@@ -52,7 +69,7 @@ void			ft_enumerate(t_philo **p);
 void			ft_circulare(t_philo **p);
 void			*ft_begin(void *p);
 void			ft_routin(t_philo *p);
-void			ft_initiate(t_philo **p, unsigned long s);
+void			ft_initiate(t_philo **p, t_data *d);
 
 // ft_utils
 int				ft_isdigit(int c);
@@ -72,4 +89,6 @@ void			ft_eat(t_philo *p);
 void			ft_think(t_philo *p);
 
 // main
+void			is_dead(t_data *data);
+
 #endif

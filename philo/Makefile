@@ -1,4 +1,3 @@
-
 M_NAME = philo
 
 SRC_MN =	main.c \
@@ -18,10 +17,10 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-all: $(M_NAME) 
+all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
+	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
 
 %.o:%.c common_files/philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@
