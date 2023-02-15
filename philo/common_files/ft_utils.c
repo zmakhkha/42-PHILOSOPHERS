@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:56:50 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/12 17:44:21 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:58:28 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_print_error(char *str, int status)
 	exit (status);
 }
 
-unsigned long	ft_get_start_time(int t)
+unsigned long	ft_stime(int t)
 {
 	struct timeval	tv;
 
@@ -50,8 +50,8 @@ void	ft_usleep(unsigned long a)
 	double	res;
 	int		i;
 
-	res = a / 20;
+	res = a / 30;
 	i = -1;
-	while (++i < 20)
+	while (++i < 30)
 		usleep(res);
 }

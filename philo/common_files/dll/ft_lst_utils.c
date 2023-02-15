@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:36:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/12 17:37:13 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:12:55 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	ft_circulare(t_philo **p)
 	l = *p;
 	end = ft_lst_get_end(l);
 	l -> next = end;
-	end -> prev = l;
+	if (end)
+		end -> prev = l;
 }

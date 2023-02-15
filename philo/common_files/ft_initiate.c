@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:24:24 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/13 20:14:26 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:02:07 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ void	*ft_begin(void *p)
 	t_philo	*a;
 
 	a = (t_philo *) p;
+	if (a->n_philo == 1)
+	{
+		ft_kill_one(a);
+		return NULL;
+	}
 	if ((a->id % 2) == 0)
-		usleep(100);
+		ft_usleep(60);
 	ft_routin(a);
 	return (NULL);
 }
@@ -32,18 +37,19 @@ void	ft_initiate(t_philo **p, t_data *d)
 	i = -1;
 	while (++i < d->n_philo)
 	{
-		l -> n_meat = 10000;
+		l -> n_meat = 20;
 		l -> start = d->s_t;
 		l -> t_eat = 200;
 		l -> l_eat = d->s_t;
-		l -> t_sleep = 50;
+		l -> t_sleep = 100;
 		l -> l_sleep = d->s_t;
 		l -> died = 0;
-		l -> t_alive = 300;
+		l -> t_alive = 310;
 		l -> t_think = 0;
 		l -> n_philo = d->n_philo;
 		pthread_mutex_init(&(l -> r_fork), NULL);
 		pthread_mutex_init(&(l -> pr), NULL);
+		pthread_mutex_init(&(l -> die), NULL);
 		l = l -> prev;
 	}		
 }

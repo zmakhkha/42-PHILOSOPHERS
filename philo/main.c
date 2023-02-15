@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/13 20:14:37 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:01:13 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ t_data	*ft_ini_data(int n, char **v)
 
 	data = (t_data *)malloc(sizeof(t_data *));
 	data -> n = n;
-	data -> n_philo = 5;
+	data -> n_philo = 2;
 	data -> v = v;
-	data ->s_t = ft_get_start_time(U_S);
+	data ->s_t = ft_stime(U_S);
 	return (data);
 }
 

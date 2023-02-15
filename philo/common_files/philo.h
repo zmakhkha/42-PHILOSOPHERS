@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/13 19:51:00 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:51:19 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	pthread_t			philo;
 	pthread_mutex_t		r_fork;
 	pthread_mutex_t		pr;
+	pthread_mutex_t		die;
 	unsigned long		t_sleep;
 	unsigned long		l_sleep;
 	unsigned long		t_eat;
@@ -70,13 +71,15 @@ void			ft_circulare(t_philo **p);
 void			*ft_begin(void *p);
 void			ft_routin(t_philo *p);
 void			ft_initiate(t_philo **p, t_data *d);
+void			ft_ini_lst(t_philo **p, t_data *d);
+
 
 // ft_utils
 int				ft_isdigit(int c);
 size_t			ft_strlen(const char *s);
 void			ft_print_error(char *str, int status);
 void			ft_void(int n, char **v);
-unsigned long	ft_get_start_time(int t);
+unsigned long	ft_stime(int t);
 void			ft_usleep(unsigned long a);
 
 // parsing_utils01
@@ -87,6 +90,14 @@ void			ft_check_args(int n, char **v);
 void			ft_sleep(t_philo *p);
 void			ft_eat(t_philo *p);
 void			ft_think(t_philo *p);
+
+// ft_death
+void	ft_set_lmeat(t_philo *p);
+int		ft_is_alive(t_philo *p);
+void	ft_kill_one(t_philo *p);
+void	ft_kill_all(t_philo *p);
+int		ft_check_death(t_philo *p);
+
 
 // main
 void			is_dead(t_data *data);
