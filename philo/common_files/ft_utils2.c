@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/15 16:01:53 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:07:24 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,32 @@
 //	else
 //		return (0);
 //}
+
+void	ft_print(char *c)
+{
+	write(1, c, ft_strlen(c));
+}
+
+t_data	*ft_fill_it(int n, char **v)
+{
+	t_data	*p;
+
+	p = (t_data *)malloc (sizeof(t_data));
+	p -> n_philo = ft_latoi(v[1]);
+	p -> t_alive = ft_latoi(v[2]);
+	p -> t_eat = ft_latoi(v[3]);
+	p -> t_sleep = ft_latoi(v[4]);
+	p -> n = n;
+	p -> inf = 0;
+	if (n == 6)
+	{
+		p -> n_meat = ft_latoi(v[5]);
+		p -> inf = 1;
+	}
+	return (p);
+}
+
+unsigned long	ft_moment(unsigned long s)
+{
+	return (ft_stime(U_S) - s);
+}

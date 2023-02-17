@@ -12,6 +12,7 @@ SRC_MN =	main.c \
 			common_files/dll/ft_lst_utils.c \
 			common_files/ft_initiate.c \
 			common_files/ft_habbits.c \
+			common_files/ft_long_atoi.c
 
 OBJ = $(SRC_MN:.c=.o)
 
@@ -22,8 +23,8 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	@$(CC)  $(CFLAGS) $(SRC_MN) -o $(M_NAME) -g
-	#@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
+	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
+	# @$(CC)  $(CFLAGS) $(SRC_MN) -o $(M_NAME) -g -fsanitize=address
 
 %.o:%.c common_files/philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@

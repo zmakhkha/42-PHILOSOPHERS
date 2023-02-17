@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:56:50 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/15 17:58:28 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:04:25 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	ft_usleep(unsigned long a)
 	double	res;
 	int		i;
 
-	res = a / 30;
+	res = a / 20;
 	i = -1;
-	while (++i < 30)
+	while (++i < 20)
 		usleep(res);
 }
