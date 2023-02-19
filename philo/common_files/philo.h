@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/17 19:26:44 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:08:55 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,49 +23,46 @@
 # define S		0
 # define U_S	1
 
-typedef struct s_philo
-{
-	struct s_philo		*next;
-	struct s_philo		*prev;
-	int					id;
-	int					dead;
-	pthread_t			philo;
-	pthread_mutex_t		r_fork;
-	pthread_mutex_t		pr;
-	pthread_mutex_t		die;
-	unsigned long		t_sleep;
-	unsigned long		l_sleep;
-	unsigned long		t_eat;
-	unsigned long		l_eat;
-	unsigned long		died;
-	unsigned long		t_alive;
-	unsigned long		start;
-	unsigned long		s_t;
-	char				**v;
-	int					n;
-	unsigned long		t_think;
-	int					n_philo;
-	int					i;
-	int					n_meat;
-	int					inf;
-}	t_philo;
+# define EAT	0
+# define SLEEP	1
+# define THINK	2
+# define DIE	3
+# define FORK	4
 
 typedef struct s_data
 {
-	int					n;
-	char				**v;
 	int					n_philo;
-	int					inf;
+
+	unsigned long		s_t;
+
 	unsigned long		t_sleep;
 	unsigned long		t_eat;
 	unsigned long		t_alive;
 
-	int					died;
 	int					n_meat;
+	int					dead;
 
-	unsigned long		s_t;
+	int					inf;
 
 }	t_data;
+
+typedef struct s_philo
+{
+	int					id;
+	pthread_t			philo;
+
+	unsigned long		l_sleep;
+	unsigned long		l_eat;
+
+	pthread_mutex_t		r_fork;
+	pthread_mutex_t		pr;
+
+	t_data				*d;
+
+	struct s_philo		*next;
+	struct s_philo		*prev;
+}	t_philo;
+
 // philo list utils philo/dll
 void			ft_lstadd_back(t_philo **lst, t_philo *new);
 void			ft_lstadd_front(t_philo **lst, t_philo *new);
@@ -109,7 +106,16 @@ int				ft_all_dead(t_philo *p);
 void			ft_print(char *c);
 t_data			*ft_fill_it(int n, char **v);
 long long		ft_latoi(const char *str);
-unsigned long	ft_moment(unsigned long s);
+int				ft_moment(unsigned long s, unsigned long e);
+// unsigned long	ft_moment(unsigned long s);
+void			ft_ini_shared(t_data **d);
+void			ft_shphilo(t_philo **p, t_data *d);
+void			ft_ps(t_philo *p, int s);
+
+// ft_putnbr
+void			ft_print(char *c);
+void			ft_putnbr(int n);
+void			ft_putchar(char c);
 
 // main
 void			is_dead(t_data *data);

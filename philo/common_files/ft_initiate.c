@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:24:24 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/17 20:21:54 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:08:30 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	*ft_begin(void *p)
 	t_philo	*a;
 
 	a = (t_philo *) p;
-	if (a->n_philo == 1)
+	if (a->d->n_philo == 1)
 	{
 		ft_kill_one(a);
 		return (NULL);
 	}
 	if ((a->id % 2) == 0)
-		ft_usleep(50);
+		usleep(a->d->t_eat);
 	ft_routin(a);
 	return (NULL);
 }
@@ -35,23 +35,13 @@ void	ft_fill_philo(t_philo **p, t_data *d)
 
 	l = *p;
 	i = -1;
-	l -> died = 0;
 	while (++i < d->n_philo)
 	{
-		l -> died = 0;
-		l -> n_meat = d->n_meat;
-		l -> start = d->s_t;
-		l -> t_eat = d->t_eat;
 		l -> l_eat = d->s_t;
-		l -> t_sleep = d->t_sleep;
 		l -> l_sleep = d->s_t;
-		l -> t_alive = d->t_alive;
-		l -> t_think = 0;
-		l -> inf = d -> inf;
-		l -> n_philo = d->n_philo;
+		l -> d = d;
 		pthread_mutex_init(&(l -> r_fork), NULL);
 		pthread_mutex_init(&(l -> pr), NULL);
-		pthread_mutex_init(&(l -> die), NULL);
 		l = l -> prev;
 	}		
 }

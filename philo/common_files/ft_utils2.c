@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/17 17:07:24 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:04:51 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@
 //		return (0);
 //}
 
-void	ft_print(char *c)
-{
-	write(1, c, ft_strlen(c));
-}
-
 t_data	*ft_fill_it(int n, char **v)
 {
 	t_data	*p;
@@ -34,7 +29,6 @@ t_data	*ft_fill_it(int n, char **v)
 	p -> t_alive = ft_latoi(v[2]);
 	p -> t_eat = ft_latoi(v[3]);
 	p -> t_sleep = ft_latoi(v[4]);
-	p -> n = n;
 	p -> inf = 0;
 	if (n == 6)
 	{
@@ -44,7 +38,52 @@ t_data	*ft_fill_it(int n, char **v)
 	return (p);
 }
 
-unsigned long	ft_moment(unsigned long s)
+int	ft_moment(unsigned long s, unsigned long e)
 {
-	return (ft_stime(U_S) - s);
+	return ((e - s) / 1000);
 }
+
+// void	ft_ini_shared(t_data **d)
+// {
+// 	t_data	*data;
+
+// 	data = *d;
+// 	data ->dead = 0;
+// 	data ->s_t = ft_stime(U_S);
+// }
+
+void	ft_shphilo(t_philo **p, t_data *d)
+{
+	t_philo	*t;
+	int		i;
+
+	i = 0;
+	t = *p;
+	while (++i < d->n_philo)
+	{
+		t->d = d;
+		t = t->prev;
+	}
+}
+
+// void	ft_ps(t_philo *p, int s)
+// {
+// 	pthread_mutex_lock(&(p->pr));
+// 	ft_putnbr(ft_moment(p->d->s_t));
+// 	ft_putchar(' ');
+// 	ft_putnbr(p->id);
+// 	if(!s)
+// 	{
+// 		p->d->n_meat--;
+// 		ft_print(" is eating\n");
+// 	}
+// 	else if (s == 1)
+// 		ft_print(" is sleeping\n");
+// 	else if (s == 2)
+// 		ft_print(" is thinking\n");
+// 	else if (s == 3)
+// 		ft_print(" died\n");
+// 	else if (s == 4)
+// 		ft_print(" has taken a fork\n");
+// 	pthread_mutex_unlock(&(p->pr));
+// }

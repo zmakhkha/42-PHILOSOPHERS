@@ -12,7 +12,8 @@ SRC_MN =	main.c \
 			common_files/dll/ft_lst_utils.c \
 			common_files/ft_initiate.c \
 			common_files/ft_habbits.c \
-			common_files/ft_long_atoi.c
+			common_files/ft_long_atoi.c \
+			common_files/ft_putnbr.c
 
 OBJ = $(SRC_MN:.c=.o)
 
