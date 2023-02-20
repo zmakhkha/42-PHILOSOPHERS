@@ -25,7 +25,6 @@ all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
 	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME)
-	# @$(CC)  $(CFLAGS) $(SRC_MN) -o $(M_NAME) -g -fsanitize=address
 
 %.o:%.c common_files/philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/19 19:09:07 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:39:07 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	ft_died(t_philo *data)
 	data -> d -> dead = 1;
 }
 
-void	ft_join_t(t_philo *p, t_data *d)
+void	ft_join_t(t_philo *p)
 {
 	t_philo	*tmp;
 	int		i;
 
 	tmp = p;
 	i = -1;
-	while (++i < d->n_philo)
+	while (++i < p->d->n_philo)
 	{
 		pthread_join((tmp->philo), NULL);
 		tmp = tmp -> prev;
@@ -45,10 +45,10 @@ t_data	*ft_ini_data(int n, char **v)
 	if (!main_parsing(n, v))
 	{
 		data = ft_fill_it(n, v);
-		data ->s_t = ft_stime(U_S);
+		data ->s_t = ft_stime();
 	}
 	data ->dead = 0;
-	data ->s_t = ft_stime(U_S);
+	data ->s_t = ft_stime();
 	return (data);
 }
 
@@ -64,7 +64,7 @@ int	main(int n, char **v)
 		return (ft_print("Error !!!"), 1);
 	lst = NULL;
 	ft_ini_lst(&lst, shared);
-	printf("starting at : %d\n", ft_moment(shared->s_t, ft_stime(U_S)));
+	printf("starting at : %lu\n", ft_moment(shared->s_t));
 	if (!lst)
 		return (ft_print("Error !!!"), 1);
 	i = 0;
@@ -75,11 +75,11 @@ int	main(int n, char **v)
 		lst = lst -> prev;
 		i++;
 	}
-	i = 0;
 	while (1)
 	{
 		if (shared->dead)
 			break ;
 	}
+
 	return (0);
 }

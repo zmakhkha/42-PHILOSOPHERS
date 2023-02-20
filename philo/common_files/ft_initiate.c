@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:24:24 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/19 19:08:30 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:37:40 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_begin(void *p)
 		return (NULL);
 	}
 	if ((a->id % 2) == 0)
-		usleep(a->d->t_eat);
+		ft_usleep(50);
 	ft_routin(a);
 	return (NULL);
 }

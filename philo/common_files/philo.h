@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/19 19:08:55 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:38:53 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define S		0
-# define U_S	1
 
 # define EAT	0
 # define SLEEP	1
@@ -82,7 +79,7 @@ int				ft_isdigit(int c);
 size_t			ft_strlen(const char *s);
 void			ft_print_error(char *str, int status);
 void			ft_void(int n, char **v);
-unsigned long	ft_stime(int t);
+unsigned long	ft_stime();
 void			ft_usleep(unsigned long a);
 
 // parsing_utils01
@@ -106,7 +103,7 @@ int				ft_all_dead(t_philo *p);
 void			ft_print(char *c);
 t_data			*ft_fill_it(int n, char **v);
 long long		ft_latoi(const char *str);
-int				ft_moment(unsigned long s, unsigned long e);
+unsigned long	ft_moment(unsigned long s);
 // unsigned long	ft_moment(unsigned long s);
 void			ft_ini_shared(t_data **d);
 void			ft_shphilo(t_philo **p, t_data *d);

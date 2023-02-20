@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/19 19:09:33 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:38:23 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,44 @@
 
 void	ft_sleep(t_philo *p)
 {
-	pthread_mutex_lock(&(p->pr));
-	printf("%d %d is sleeping\n", ft_moment(p->d->s_t, \
-		ft_stime(U_S)), p->id);
-	ft_usleep(p->d->t_sleep * 1000);
-	pthread_mutex_unlock(&(p->pr));
+	if (ft_is_alive(p))
+	{
+		pthread_mutex_lock(&(p->pr));
+		printf("%lu %d is sleeping\n", ft_moment(p->d->s_t), p->id);
+		ft_usleep(p->d->t_sleep);
+		pthread_mutex_unlock(&(p->pr));
+		ft_think(p);
+	}
 }
 
 void	ft_think(t_philo *p)
 {
-	pthread_mutex_lock(&(p->pr));
-	printf("%d %d is thinking\n", ft_moment(p->d->s_t, \
-		ft_stime(U_S)), p->id);
-	pthread_mutex_unlock(&(p->pr));
+	if (ft_is_alive(p))
+	{
+		pthread_mutex_lock(&(p->pr));
+		printf("%lu %d is thinking\n", ft_moment(p->d->s_t), p->id);
+		pthread_mutex_unlock(&(p->pr));
+	}
 }
 
 void	ft_take_fork(t_philo *p)
 {
-	pthread_mutex_lock(&(p->r_fork));
-	pthread_mutex_lock(&(p->pr));
-	printf("%d %d has taken a fork\n", ft_moment(p->d->s_t, \
-		ft_stime(U_S)), p->id);
-	pthread_mutex_unlock(&(p->pr));
 	if (ft_is_alive(p))
-	{	
+	{
+		pthread_mutex_lock(&(p->r_fork));
+		pthread_mutex_lock(&(p->pr));
+		printf("%lu %d has taken a fork\n", ft_moment(p->d->s_t), p->id);
+		pthread_mutex_unlock(&(p->pr));
 		pthread_mutex_lock(&(p-> prev ->r_fork));
 		pthread_mutex_lock(&(p->pr));
-		printf("%d %d has taken a fork\n", ft_moment(p->d->s_t, \
-			ft_stime(U_S)), p->id);
-		printf("%d %d is eating\n", ft_moment(p->d->s_t, \
-			ft_stime(U_S)), p->id);
-		pthread_mutex_unlock(&(p->pr));
+		printf("%lu %d has taken a fork\n", ft_moment(p->d->s_t), p->id);
+		printf("%lu %d is eating\n", ft_moment(p->d->s_t), p->id);
 		p->d->n_meat--;
-		ft_usleep(p ->d->t_eat * 1000);
+		ft_usleep(p ->d->t_eat);
+		p->l_eat = ft_stime();
+		pthread_mutex_unlock(&(p->pr));
 		pthread_mutex_unlock(&(p-> prev ->r_fork));
 		pthread_mutex_unlock(&(p->r_fork));
-		p->l_eat = ft_stime(U_S);
 	}
 	else
 		ft_kill_one(p);
