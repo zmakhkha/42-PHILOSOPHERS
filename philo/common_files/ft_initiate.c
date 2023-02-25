@@ -6,27 +6,11 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:24:24 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/20 18:37:40 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:46:35 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
-
-void	*ft_begin(void *p)
-{
-	t_philo	*a;
-
-	a = (t_philo *) p;
-	if (a->d->n_philo == 1)
-	{
-		ft_kill_one(a);
-		return (NULL);
-	}
-	if ((a->id % 2) == 0)
-		ft_usleep(50);
-	ft_routin(a);
-	return (NULL);
-}
 
 void	ft_fill_philo(t_philo **p, t_data *d)
 {
@@ -37,11 +21,9 @@ void	ft_fill_philo(t_philo **p, t_data *d)
 	i = -1;
 	while (++i < d->n_philo)
 	{
-		l -> l_eat = d->s_t;
-		l -> l_sleep = d->s_t;
 		l -> d = d;
 		pthread_mutex_init(&(l -> r_fork), NULL);
-		pthread_mutex_init(&(l -> pr), NULL);
+		pthread_mutex_init(&(l -> d -> pr), NULL);
 		l = l -> prev;
 	}		
 }

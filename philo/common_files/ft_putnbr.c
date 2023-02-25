@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:57:57 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/19 19:08:48 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:53:46 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,30 @@ void	ft_putnbr(int n)
 		ft_putnbr(n / 10);
 	}
 	ft_putchar((n % 10) + '0');
+}
+
+void	ft_stat(t_philo *p, unsigned long time, int action)
+{
+	pthread_mutex_lock(&(p->d->pr));
+	ft_putnbr(time);
+	ft_putchar(' ');
+	ft_putnbr(p->id);
+	ft_putchar(' ');
+	if (!action)
+		ft_print("has taken a fork\n");
+	else if (action == 1)
+		ft_print("is eating\n");
+	else if (action == 2)
+	{
+		ft_print("is sleeping\n");
+		ft_usleep(p->d->t_sleep);
+	}
+	else if (action == 3)
+		ft_print("is thinking\n");
+	else if (action == 4)
+	{
+		ft_print("is Dead\n");
+		p ->d->dead = 1;
+	}
+	pthread_mutex_unlock(&(p->d->pr));
 }

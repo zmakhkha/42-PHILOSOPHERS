@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/20 19:38:32 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:47:05 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,9 @@ t_data	*ft_fill_it(int n, char **v)
 
 // Retun the moment in ms
 
-unsigned long	ft_moment(unsigned long s)
+int	ft_moment(unsigned long s)
 {
-	unsigned long	e;
-
-	e = ft_stime();
-	if (e - s > 0)
-		return ((e - s) / 1000);
-	else
-		return (-1);
+	return ((ft_stime() - s) / 1000);
 }
 
 void	ft_shphilo(t_philo **p, t_data *d)
@@ -63,4 +57,14 @@ void	ft_shphilo(t_philo **p, t_data *d)
 		t->d = d;
 		t = t->prev;
 	}
+}
+
+int	ft_is_alive(t_philo *p)
+{
+	int	i;
+
+	i = 0;
+	if ((ft_stime() - p -> l_eat) <= p ->d->t_alive * 1000)
+		i = 1;
+	return (i);
 }

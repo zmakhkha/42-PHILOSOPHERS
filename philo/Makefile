@@ -3,7 +3,6 @@ M_NAME = philo
 SRC_MN =	main.c \
 			common_files/ft_utils.c \
 			common_files/ft_utils2.c \
-			common_files/ft_death.c \
 			parsing/parsing_utils01.c \
 			common_files/dll/ft_lst_new.c \
 			common_files/dll/ft_lst_addback.c \

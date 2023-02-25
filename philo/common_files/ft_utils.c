@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:56:50 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/20 19:33:49 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:16:06 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,24 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
+unsigned long long	ft_stime(void)
+{
+	struct timeval		tv;
+	unsigned long long	time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_usec;
+	return (time);
+}
+
+void	ft_usleep(unsigned long a)
+{
+	usleep(a * 1000);
+}
+
 void	ft_print_error(char *str, int status)
 {
 	write(1, str, ft_strlen(str));
 	write(1, "\n", 1);
 	exit (status);
-}
-
-unsigned long	ft_stime()
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_usec);
-}
-
-void	ft_usleep(unsigned long a)
-{
-	unsigned long	t;
-	unsigned long	tu;
-
-	tu = a * 1000;
-	t = 0;
-	while (t < tu)
-	{
-		usleep(5000);
-		t += 5000;
-	}
 }
