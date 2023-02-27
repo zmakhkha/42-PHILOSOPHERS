@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/25 20:17:45 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:40:52 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_eat(t_philo *p)
 		pthread_mutex_lock(&(p-> prev ->r_fork));
 		ft_stat(p, ft_moment(p->d->s_t), FORK);
 		ft_stat(p, ft_moment(p->d->s_t), EAT);
-		p->d->n_meat--;
+		p->d->t_meat--;
 		ft_usleep(p ->d->t_eat);
 		p->l_eat = ft_stime();
 		pthread_mutex_unlock(&(p-> prev ->r_fork));
@@ -55,39 +55,3 @@ void	*ft_begin(void *a)
 	ft_stat(p, ft_moment(p->d->s_t), DIE);
 	return (NULL);
 }
-
-// void	ft_routin(t_philo *p)
-// {
-// 	while (ft_is_alive(p))
-// 	{
-// 		ft_eat(p);
-// 		if (ft_is_alive(p))
-// 		{
-// 			ft_stat(p, ft_moment(p->d->s_t), SLEEP);
-// 			ft_usleep(p->d->t_sleep);
-// 		}
-// 		if (ft_is_alive(p))
-// 		{
-// 			ft_stat(p, ft_moment(p->d->s_t), THINK);
-// 			continue ;
-// 		}
-// 	}
-// 	ft_stat(p, ft_moment(p->d->s_t), DIE);
-// }
-
-// void	ft_sleep(t_philo *p)
-// {
-// 	if (ft_is_alive(p))
-// 	{
-// 		ft_stat(p, ft_moment(p->d->s_t), SLEEP);
-// 		ft_usleep(p->d->t_sleep);
-// 	}
-// }
-
-// void	ft_think(t_philo *p)
-// {
-// 	if (ft_is_alive(p))
-// 	{
-// 		ft_stat(p, ft_moment(p->d->s_t), THINK);
-// 	}
-// }

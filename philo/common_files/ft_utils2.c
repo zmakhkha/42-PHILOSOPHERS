@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/25 19:47:05 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/27 20:12:56 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void	ft_shphilo(t_philo **p, t_data *d)
 
 int	ft_is_alive(t_philo *p)
 {
-	int	i;
-
-	i = 0;
-	if ((ft_stime() - p -> l_eat) <= p ->d->t_alive * 1000)
-		i = 1;
-	return (i);
+	return (((ft_stime() - p -> l_eat) <= p ->d->t_alive * 1000)
+		&& (p->d->t_meat != 0));
 }

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/25 20:17:08 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:38:54 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	unsigned long		t_alive;
 
 	int					n_meat;
+	int					t_meat;
 	int					dead;
 
 	int					inf;

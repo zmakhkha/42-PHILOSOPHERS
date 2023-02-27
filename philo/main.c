@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/25 19:29:43 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:44:04 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_data	*ft_ini_data(int n, char **v)
 	{
 		data = ft_fill_it(n, v);
 		data ->dead = 0;
+		data -> t_meat = data ->n_philo * data -> n_meat;
 	}
 	return (data);
 }
