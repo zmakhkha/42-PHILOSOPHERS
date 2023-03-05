@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/27 19:40:52 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:33:36 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	ft_eat(t_philo *p)
 {
 	pthread_mutex_lock(&(p->r_fork));
-	ft_stat(p, ft_moment(p->d->s_t), FORK);
+	ft_fork(p, ft_moment(p));
 	if (ft_is_alive(p))
 	{
 		pthread_mutex_lock(&(p-> prev ->r_fork));
-		ft_stat(p, ft_moment(p->d->s_t), FORK);
-		ft_stat(p, ft_moment(p->d->s_t), EAT);
-		p->d->t_meat--;
-		ft_usleep(p ->d->t_eat);
+		ft_fork(p, ft_moment(p));
 		p->l_eat = ft_stime();
+		ft_eating(p, ft_moment(p));
+		ft_usleep(p ->d->t_eat);
+		p->d->t_meat--;
 		pthread_mutex_unlock(&(p-> prev ->r_fork));
 		pthread_mutex_unlock(&(p->r_fork));
 	}
@@ -34,24 +34,30 @@ void	*ft_begin(void *a)
 	t_philo	*p;
 
 	p = (t_philo *) a;
+	p->l_eat = p->d->s_t;
+	p->l_sleep = p->d->s_t;
 	if (p->d->n_philo == 1)
 	{
-		ft_stat(p, ft_moment(p->d->s_t), DIE);
+		ft_dead(p, ft_moment(p));
 		return (NULL);
 	}
 	if ((p->id % 2) == 0)
-		usleep(1000);
+		usleep(100);
 	while (ft_is_alive(p))
 	{
 		ft_eat(p);
 		if (ft_is_alive(p))
-			ft_stat(p, ft_moment(p->d->s_t), SLEEP);
-		if (ft_is_alive(p))
 		{
-			ft_stat(p, ft_moment(p->d->s_t), THINK);
-			continue ;
+			ft_sleeping(p, ft_moment(p));
+			ft_usleep(p->d->t_sleep);
+		}
+		if (ft_is_alive(p))
+			ft_thinking(p, ft_moment(p));
+		if (!ft_is_alive(p))
+		{
+			ft_dead(p, ft_moment(p));
+			break ;
 		}
 	}
-	ft_stat(p, ft_moment(p->d->s_t), DIE);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/02/27 19:38:54 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:48:56 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+// Habits
+
 # define FORK	0
 # define EAT	1
 # define SLEEP	2
 # define THINK	3
 # define DIE	4
+
+// Shared Data Struct
 
 typedef struct s_data
 {
@@ -45,6 +49,8 @@ typedef struct s_data
 	int					inf;
 
 }	t_data;
+
+// Philosopher Struct
 
 typedef struct s_philo
 {
@@ -106,9 +112,17 @@ void				ft_print_error(char *str, int status); // exit
 //ft_utils2
 
 t_data				*ft_fill_it(int n, char **v);
-int					ft_moment(unsigned long s);
+int					ft_moment(t_philo *p);
 void				ft_shphilo(t_philo **p, t_data *d);
 int					ft_is_alive(t_philo *p);
+
+//ft_actions
+
+void				ft_fork(t_philo *p, unsigned long long time);
+void				ft_eating(t_philo *p, unsigned long long time);
+void				ft_sleeping(t_philo *p, unsigned long long time);
+void				ft_thinking(t_philo *p, unsigned long long time);
+void				ft_dead(t_philo *p, unsigned long long time);
 
 // main
 void				is_dead(t_data *data);
