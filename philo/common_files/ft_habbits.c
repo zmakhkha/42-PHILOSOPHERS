@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/05 21:33:36 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:00:51 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,8 @@ void	*ft_begin(void *a)
 			ft_sleeping(p, ft_moment(p));
 			ft_usleep(p->d->t_sleep);
 		}
-		if (ft_is_alive(p))
-			ft_thinking(p, ft_moment(p));
-		if (!ft_is_alive(p))
-		{
-			ft_dead(p, ft_moment(p));
-			break ;
-		}
+		ft_thinking(p, ft_moment(p));
 	}
+	ft_dead(p, ft_moment(p));
 	return (NULL);
 }
