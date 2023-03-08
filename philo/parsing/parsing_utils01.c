@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:10:25 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/06 16:23:02 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:37:13 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_check_args(int n, char **v)
 
 int	main_parsing(int n, char **v)
 {
-	if (n < 5 || n > 6 || ft_check_args(n, v))
+	if (n < 5 || n > 6 || ft_check_args(n, v) || !ft_latoi(v[1]))
 		return (1);
 	return (0);
 }

@@ -24,7 +24,7 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=address
+	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g
 
 %.o:%.c common_files/philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@

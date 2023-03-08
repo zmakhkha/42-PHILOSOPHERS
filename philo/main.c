@@ -6,16 +6,11 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/06 16:23:18 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:10:31 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"common_files/philo.h"
-
-void	ft_died(t_philo *data)
-{
-	data -> d -> dead = 1;
-}
 
 t_data	*ft_ini_data(int n, char **v)
 {
