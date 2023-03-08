@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/05 18:48:56 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:07:30 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	int					n_philo;
 
 	pthread_mutex_t		pr;
+	pthread_mutex_t		m_dead;
 
 	unsigned long		s_t;
 
@@ -125,6 +126,6 @@ void				ft_thinking(t_philo *p, unsigned long long time);
 void				ft_dead(t_philo *p, unsigned long long time);
 
 // main
-void				is_dead(t_data *data);
+t_data				*ft_ini_data(int n, char **v);
 
 #endif

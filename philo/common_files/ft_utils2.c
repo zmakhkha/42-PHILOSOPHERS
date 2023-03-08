@@ -6,24 +6,37 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/05 21:34:38 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:47:13 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
 
-//int	ft_is_alive(t_philo *p)
-//{
-//	if (p -> l_eat + p -> l_sleep < p -> t_alive)
-//		return (1);
-//	else
-//		return (0);
-//}
+static void	ft_init_mutex(t_data *p)
+{
+	int		a;
+
+	a = 0;
+	a = pthread_mutex_init(&(p->pr), NULL);
+	if (a)
+	{
+		pthread_mutex_destroy(&(p->pr));
+		pthread_mutex_init(&(p->pr), NULL);
+	}
+	a = pthread_mutex_init(&(p->m_dead), NULL);
+	if (a)
+	{
+		pthread_mutex_destroy(&(p->m_dead));
+		pthread_mutex_init(&(p->m_dead), NULL);
+	}
+}
 
 t_data	*ft_fill_it(int n, char **v)
 {
 	t_data	*p;
+	int		a;
 
+	a = 0;
 	p = (t_data *)malloc (sizeof(t_data));
 	if (!p)
 		return (NULL);
@@ -32,6 +45,7 @@ t_data	*ft_fill_it(int n, char **v)
 	p -> t_eat = ft_latoi(v[3]);
 	p -> t_sleep = ft_latoi(v[4]);
 	p -> inf = 1;
+	ft_init_mutex(p);
 	if (n == 6)
 	{
 		p -> n_meat = ft_latoi(v[5]);

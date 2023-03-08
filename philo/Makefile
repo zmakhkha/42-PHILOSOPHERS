@@ -24,16 +24,16 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g
+	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=thread
 
 %.o:%.c common_files/philo.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean:
-	@rm -f $(OBJ) $(M_NAME)
+	rm -f $(OBJ) $(M_NAME)
 
 re	: fclean	all
 

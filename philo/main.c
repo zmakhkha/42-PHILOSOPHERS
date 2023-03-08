@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/08 12:10:31 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:07:22 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,27 @@ t_data	*ft_ini_data(int n, char **v)
 	return (data);
 }
 
+static int	ft_main(t_data *shared, t_philo *lst)
+{
+	int	i;
+
+	i = -1;
+	shared->s_t = ft_stime();
+	while (++i < shared->n_philo)
+	{
+		if (pthread_create(&(lst ->philo), NULL, ft_begin, lst))
+			return (1);
+		lst = lst -> prev;
+	}
+	while (1)
+	{
+		usleep(100);
+		if (shared->dead || (!shared->t_meat && !shared->inf))
+			break ;
+	}
+	return (0);
+}
+
 int	main(int n, char **v)
 {
 	t_philo			*lst;
@@ -42,18 +63,13 @@ int	main(int n, char **v)
 	ft_ini_lst(&lst, shared);
 	if (!lst)
 		return (ft_print("Error !!!"), 1);
+	if (ft_main(shared, lst))
+		return (1);
 	i = -1;
-	shared->s_t = ft_stime();
 	while (++i < shared->n_philo)
 	{
-		if (pthread_create(&(lst ->philo), NULL, ft_begin, lst))
-			return (1);
-		lst = lst -> prev;
-	}
-	while (1)
-	{
-		if (shared->dead || (!shared->t_meat && !shared->inf))
-			break ;
-	}
+		pthread_detach(lst->philo);
+		lst = lst->prev;
+	}	
 	return (0);
 }

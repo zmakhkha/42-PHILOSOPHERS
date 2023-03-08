@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:42:58 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/06 15:59:07 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:53:29 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	ft_dead(t_philo *p, unsigned long long time)
 	ft_putnbr(p->id);
 	ft_putchar(' ');
 	ft_print("is Dead\n");
+	pthread_mutex_lock(&(p->d->m_dead));
 	p->d->dead = 1;
+	pthread_mutex_unlock(&(p->d->m_dead));
 	return ;
 }
