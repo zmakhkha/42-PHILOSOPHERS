@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:42:14 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:02:29 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <semaphore.h>
+# include <fcntl.h>
 
 // status
 # define SUCC	0

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:24:09 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:26:07 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:04:27 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ void	ft_create_philo(t_data *shared)
 void	ft_destroy(t_data *data)
 {
 	int		i;
-	sem_t	*tmp;
 
-	tmp = NULL;
 	// Close and unlink
 	i = -1;
 	while (++i < data->n_philo)
