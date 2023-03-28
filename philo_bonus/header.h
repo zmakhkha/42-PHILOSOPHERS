@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 22:02:29 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/28 23:13:54 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_data
 {
 	int					n_philo;
 
-	pthread_mutex_t		pr;
-	pthread_mutex_t		m_dead;
+	sem_t				pr;
+	sem_t				m_dead;
 	sem_t				*forks;
 
 	unsigned long		s_t;
@@ -67,12 +67,12 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int					id;
-	pthread_t			philo;
+	// pthread_t			philo;
 
-	unsigned long		l_sleep;
-	unsigned long		l_eat;
+	unsigned long 		l_sleep;
+	unsigned long 		l_eat;
 
-	pthread_mutex_t		r_fork;
+	// pthread_mutex_t		r_fork;
 
 	t_data				*d;
 
@@ -100,7 +100,7 @@ void				ft_print(char *c);
 void				ft_putnbr(int n);
 
 // philo_bonus/common_files/ft_routine.c
-void				ft_routine(t_data *shared, int id);
+void				ft_routine(t_philo *p);
 
 // philo_bonus/common_files/ft_utils.c
 int					ft_isdigit(int c);
@@ -108,7 +108,7 @@ size_t				ft_strlen(const char *s);
 void				ft_print_error(char *str, int status);
 
 // philo_bonus/common_files/ft_time_utils.c
-int					t_moment(t_philo *p);
+unsigned long long	ft_moment(t_philo *p);
 unsigned long long	ft_stime(void);
 void				ft_usleep(unsigned long a);
 int					ft_is_alive(t_philo *p);
@@ -119,8 +119,15 @@ t_data				*ft_parse_it(int n, char **v);
 int					ft_valid_args(int n, char **v);
 
 // philo_bonus/common_files/ft_sems.c
-void				ft_create_forks(t_data *shared);
-void				ft_create_philo(t_data *shared);
+void				ft_create_forks(t_philo *p);
+void				ft_create_philo(t_philo *p);
 void				ft_destroy(t_data *data);
+
+// common_files/ft_actions.c
+void				ft_fork(t_philo *p, unsigned long long time);
+void				ft_eating(t_philo *p, unsigned long long time);
+void				ft_sleeping(t_philo *p, unsigned long long time);
+void				ft_thinking(t_philo *p, unsigned long long time);
+void				ft_dead(t_philo *p, unsigned long long time);
 
 #endif

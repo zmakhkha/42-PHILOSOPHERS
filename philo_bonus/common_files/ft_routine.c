@@ -6,39 +6,48 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:23:13 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/27 22:55:03 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:07:09 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../header.h"
 
-void	ft_eat(t_philo *philo)
+void	ft_eat(t_philo *p)
 {
-	sem_wait(&shared->forks[l_fork]);
-	if (ft_is_alive(philo))
+	int	n;
+
+	n = p->d->n_philo;
+	sem_wait(&p->d->forks[p->id % n]);
+	if (ft_is_alive(p))
 	{
-		sem_wait(&shared->forks[r_fork]);
-		philo->l_eat = ft_stime;
-		
+		sem_wait(&p->d->forks[(p->id + 1) % n]);
+		p->l_eat = ft_stime();
+		ft_eating(p, ft_moment(p));
+		ft_usleep(p ->d->t_eat);
+		p->d->t_meat--;
+		sem_post(&p->d->forks[(p->id + 1) % n]);
+		sem_post(&p->d->forks[p->id % n]);
 	}
 }
 
-void	ft_routine(t_data *shared, int id)
+void	ft_routine(t_philo *p)
 {
-	int	l_fork;
-	int	r_fork;
-
-	l_fork = id;
-	r_fork = id % shared->n_philo;
-	while (1)
+	p->l_eat = p->d->s_t;
+	p->l_sleep = p->d->s_t;
+	if (p->d->n_philo == 1)
 	{
-		sem_wait(&shared->forks[l_fork]);
-		sem_wait(&shared->forks[r_fork]);
-		printf("Philo %d is eating\n", id);
-		sleep(2);
-		sem_post(&shared->forks[r_fork]);
-		sem_post(&shared->forks[l_fork]);
-		printf("Philo %d is thinking\n", id);
-		sleep(1);
+		ft_dead(p, ft_moment(p));
+		return;
 	}
+	while (ft_is_alive(p))
+	{
+		ft_eat(p);
+		if (ft_is_alive(p))
+		{
+			ft_sleeping(p, ft_moment(p));
+			ft_usleep(p->d->t_sleep);
+		}
+		ft_thinking(p, ft_moment(p));
+	}
+	ft_dead(p, ft_moment(p));
 }

@@ -14,7 +14,7 @@ SRC_MN =	main.c \
 			common_files/ft_time_utils.c \
 			common_files/ft_utils.c \
 			common_files/parsing_utils.c \
-			common_files\ft_actions.c
+			common_files/ft_actions.c
 
 OBJ = $(SRC_MN:.c=.o)
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=thread -lpthread -lrt
+	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=thread -lpthread
 
 %.o:%.c common_files/philo.h
 	$(CC) $(CFLAGS) -c $< -o $@
