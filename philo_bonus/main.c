@@ -6,17 +6,16 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/28 23:14:13 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/31 09:01:27 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"header.h"
 
-void	ft_initiate(t_philo *p)
-{
-	ft_create_forks(p);
-	ft_create_philo(p);
-}
+//void	ft_initiate(t_philo *p)
+//{
+	
+//}
 
 void	ft_fill_philo(t_philo **p, t_data *d)
 {
@@ -27,20 +26,18 @@ void	ft_fill_philo(t_philo **p, t_data *d)
 	i = -1;
 	while (++i < d->n_philo)
 	{
-		l -> d = d;
+		l -> d = *d;
 		l = l -> prev;
 	}		
 }
 
 void	ft_ini_lst(t_philo **p, t_data *d)
 {
-	t_philo	*l;
-	int		i;
+	int	i;
 
 	i = -1;
 	while (++i < d->n_philo)
 		ft_lstadd_back(p, ft_lstnew());
-	l = *p;
 	ft_enumerate(p);
 	ft_circulare(p);
 	ft_fill_philo(p, d);
@@ -48,25 +45,33 @@ void	ft_ini_lst(t_philo **p, t_data *d)
 
 int	main(int n, char **v)
 {
-	t_data	*shared;
+	//t_data	*shared;
+	t_data	shared;
 	t_philo	*lst;
-
-	lst = NULL;
+	int		pid;
 	int		i;
+	lst = NULL;
 
-	shared = NULL;
 	shared = ft_parse_it(n, v);
-	if (!shared)
-		ft_exit("Allocation Problem !!", 1);
-	ft_ini_lst(&lst, shared);
-	ft_initiate(lst);
-	// // wait for all the process
+	ft_ini_lst(&lst, &shared);
 	i = -1;
-	while (++i < shared->n_philo)
+	printf("main ->%lu\n", shared.s_t);
+	while (++i < shared.n_philo)
 	{
-		waitpid(-1, NULL, 0);
+		pid = fork();
+		if (pid < 0)
+			perror("Mochkil fel fork !!\n");
+		else if (!pid)
+		{
+			ft_routine(lst);
+		}
+		else
+			lst = lst->prev;
+	}
+	while(1)
+	{
+		pid_t t = waitpid(-1, NULL, 0);
+		if (t == -1)
+			exit(0);
 	}	
-	// Destroy all the semaphores
-	ft_destroy(shared);
-	free(shared);
 }

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/28 22:06:46 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/31 08:53:55 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Retun the moment in ms
 int	ft_moment(t_philo *p)
 {
-	return ((ft_stime() - p->d->s_t) / 1000);
+	return ((ft_stime() - p->d.s_t) / 1000);
 }
 
 // return the time from the epoch in us
@@ -43,5 +43,5 @@ void	ft_usleep(unsigned long a)
 
 int	ft_is_alive(t_philo *p)
 {
-	return (((ft_stime() - p -> l_eat) <= p ->d->t_alive * 1000));
+	return (((ft_stime() - p -> l_eat) <= p ->d.t_alive * 1000));
 }

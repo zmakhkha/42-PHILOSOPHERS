@@ -6,66 +6,84 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:42:13 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:18:23 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:25:16 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"header.h"
+#include "header.h"
+#include <stdio.h>          /* printf()                 */
+#include <stdlib.h>         /* exit(), malloc(), free() */
+#include <sys/types.h>      /* key_t, sem_t, pid_t      */
+#include <sys/shm.h>        /* shmat(), IPC_RMID        */
+#include <errno.h>          /* errno, ECHILD            */
+#include <semaphore.h>      /* sem_open(), sem_destroy(), sem_wait().. */
+#include <fcntl.h> 			/* O_CREAT, O_EXEC          */
 
-// t_data	*ft_ini_data(int n, char **v)
-// {
-// 	t_data			*data;
 
-// 	data = NULL;
-// 	if (!main_parsing(n, v))
-// 	{
-// 		data = ft_fill_it(n, v);
-// 		if (data)
-// 		{
-// 			data ->dead = 0;
-// 			data -> t_meat = data ->n_philo * data -> n_meat;
-// 		}
-// 	}
-// 	return (data);
-// }
+const char *semName = "haha";
 
-// static int	ft_main(t_data *shared, t_philo *lst)
-// {
-// 	int	i;
+void parent(void){
+    sem_t *sem;
 
-// 	i = -1;
-// 	shared->s_t = ft_stime();
-// 	while (++i < shared->n_philo)
-// 	{
-// 		if (pthread_create(&(lst ->philo), NULL, ft_begin, lst))
-// 			return (1);
-// 		lst = lst -> prev;
-// 	}
-// 	while (1)
-// 	{
-// 		usleep(100);
-// 		if (shared->dead || (!shared->t_meat && !shared->inf))
-// 			break ;
-// 	}
-// 	return (0);
-// }
+	sem = sem_open(semName, O_CREAT, 0600, 0);
 
-// int	main(void)
-// {
-// 	pid_t	p1, p2, p3;
-// 	FILE	*f1, *f2, *f3;
+    if (sem == SEM_FAILED){
+        perror("Parent  : [sem_open] Failed\n"); return;
+    }
 
-// 	f1 = fopen("/dev/ttys003", "w");
-// 	f2 = fopen("/dev/ttys004", "w");
-// 	f3 = fopen("/dev/ttys005", "w");
-// 	p1 = fork();
-// 	p2 = fork();
-// 	p3 = fork();
-// 	if(!p1)
-// 		fprintf(f1, "haaaaana 01\n");
-// 	if(!p2)
-// 		fprintf(f2, "haaaaana 02\n");
-// 	if(!p3)
-// 		fprintf(f3, "haaaaana 03\n");
-// 	return (0);
-// }
+    printf("Parent  : Wait for Child to Print\n");
+    if (sem_wait(sem) < 0)
+        printf("Parent  : [sem_wait] Failed\n");
+    printf("Parent  : Child Printed! \n");
+    
+    if (sem_close(sem) != 0){
+        perror("Parent  : [sem_close] Failed\n"); return;
+    }
+
+    if (sem_unlink(semName) < 0){
+        printf("Parent  : [sem_unlink] Failed\n"); return;
+    }
+}
+
+void child(void)
+{
+    sem_t *sem;
+
+	sem = sem_open(semName, O_CREAT, 0600, 0);
+
+    if (sem == SEM_FAILED){
+        perror("Child error yaaa wld hnini\n"); return;        
+    }
+
+    printf("Child   : saliiina men Semaphore\n");
+    if (sem_post(sem) < 0)
+        printf("Child   : masebna liha jehd \n");
+}
+
+int main(int argc, char *argv[])
+{
+    pid_t pid;
+	int	i;
+
+	i = 3;
+	while (--i)
+	{
+		pid = fork();
+	}
+    if (pid < 0){
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    if (!pid){
+        child();
+        printf("Child   : Done with sem_open \n");
+    }
+    else{
+        int status;
+        parent();
+        waitpid(-1, NULL, 0);
+        printf("Parent  : Done with sem_open \n");
+    }
+
+    return 0;
+}

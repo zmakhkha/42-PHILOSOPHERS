@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils01.c                                  :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:10:25 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:28:24 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/03/31 08:57:31 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,45 @@ int	ft_isnumber(char *number)
 	return (SUCC);
 }
 
-t_data	*ft_parse_it(int n, char **v)
+void	ft_initsem(t_data *data)
 {
-	t_data	*data;
+	data->pr = sem_open(PRINT, O_CREAT | O_EXCL, 0777, 1);
+	if (data->pr == SEM_FAILED)
+	{
+		sem_unlink(PRINT);
+		sem_close(data->pr);
+		data->pr = sem_open(PRINT, O_CREAT | O_EXCL, 0777, 1);
+		if (data->pr == SEM_FAILED)
+			perror("mockila hadi");
+	}
+	data->forks = sem_open(FORKS, O_CREAT | O_EXCL, 0777, data->n_philo);
+	if (data->forks == SEM_FAILED)
+	{
+		sem_unlink(FORKS);
+		sem_close(data->forks);
+		data->forks = sem_open(FORKS, O_CREAT | O_EXCL, 0777, data->n_philo);
+		if (data->forks == SEM_FAILED)
+			perror("mockila hadi");
+	}
+}
 
-	data = NULL;
+// parse the input and return a valid struct of the args
+t_data	ft_parse_it(int n, char **v)
+{
+	t_data	data;
+
 	if (n < 5 || n > 6)
 		ft_exit("Wrong Parameters !!", 1);
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		ft_exit("Allocation problem !!", 1);
 	if (ft_valid_args(n, v) == ERR)
 		ft_exit("Arguments problem !!", 1);
-	data->n_philo = ft_latoi(v[1]);
-	data->t_alive = ft_latoi(v[2]);
-	data->t_eat = ft_latoi(v[3]);
-	data->t_sleep = ft_latoi(v[4]);
+	data.n_philo = ft_latoi(v[1]);
+	data.t_alive = ft_latoi(v[2]);
+	data.t_eat = ft_latoi(v[3]);
+	data.t_sleep = ft_latoi(v[4]);
+	ft_initsem(&data);
 	if (n == 6)
-	data->n_meat = ft_latoi(v[5]);
+		data.n_meat = ft_latoi(v[5]);
+	data.s_t = ft_stime();
 	return (data);
 }
 
