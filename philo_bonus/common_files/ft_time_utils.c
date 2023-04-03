@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/31 08:53:55 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:46:57 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	ft_usleep(unsigned long a)
 
 int	ft_is_alive(t_philo *p)
 {
-	return (((ft_stime() - p -> l_eat) <= p ->d.t_alive * 1000));
+	return (((ft_stime() - p -> l_eat) <= p ->d.t_alive * 1000) || (!p->d.t_meat && !p->d.inf));
 }

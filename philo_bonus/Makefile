@@ -29,10 +29,10 @@ $(M_NAME) : $(OBJ)
 	@$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=thread -lpthread
 
 %.o:%.c header.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ && clear
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) && clear
 
 fclean:
 	@rm -f $(OBJ) $(M_NAME)

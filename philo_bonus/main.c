@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/31 09:01:27 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:51:36 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,13 @@ int	main(int n, char **v)
 	shared = ft_parse_it(n, v);
 	ft_ini_lst(&lst, &shared);
 	i = -1;
-	printf("main ->%lu\n", shared.s_t);
+	while (++i < shared.n_philo)
+	{
+		lst->l_eat = shared.s_t;
+		lst->l_sleep = shared.s_t;
+		lst = lst->prev;
+	}
+	i = -1;
 	while (++i < shared.n_philo)
 	{
 		pid = fork();
@@ -70,8 +76,9 @@ int	main(int n, char **v)
 	}
 	while(1)
 	{
-		pid_t t = waitpid(-1, NULL, 0);
-		if (t == -1)
+		ft_usleep(100);
+		pid = waitpid(-1, NULL, 0);
+		if (pid == -1)
 			exit(0);
 	}	
 }

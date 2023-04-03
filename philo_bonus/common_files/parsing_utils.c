@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:10:25 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/31 08:57:31 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:54:20 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,13 @@ t_data	ft_parse_it(int n, char **v)
 	data.t_eat = ft_latoi(v[3]);
 	data.t_sleep = ft_latoi(v[4]);
 	ft_initsem(&data);
+	data.inf = 1;
 	if (n == 6)
+	{
 		data.n_meat = ft_latoi(v[5]);
+		data.t_meat = data.n_meat * data.n_philo;
+		data.inf = 0;
+	}
 	data.s_t = ft_stime();
 	return (data);
 }
