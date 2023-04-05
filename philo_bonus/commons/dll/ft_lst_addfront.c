@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lst_addfront.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 15:57:57 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:31:50 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/02/12 11:32:25 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/05 14:55:49 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../header.h"
+#include"../../philo_bonus.h"
 
-void	ft_putchar(char c)
+void	ft_lstadd_front(t_philo **lst, t_philo *new)
 {
-	write(1, &c, 1);
-}
-
-void	ft_print(char *c)
-{
-	write(1, c, ft_strlen(c));
-}
-
-void	ft_putnbr(int n)
-{
-	if (n > 9)
+	if (lst && new)
 	{
-		ft_putnbr(n / 10);
+		if (*lst && new)
+		{
+			new ->prev = *lst;
+			(*lst)-> next = new;
+		}
+	(*lst) = new;
 	}
-	ft_putchar((n % 10) + '0');
 }

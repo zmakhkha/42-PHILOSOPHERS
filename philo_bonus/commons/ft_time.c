@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_time_utils.c                                    :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/03 15:46:57 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/04/05 14:46:26 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/05 14:52:20 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../header.h"
-
-// Retun the moment in ms
-int	ft_moment(t_philo *p)
-{
-	return ((ft_stime() - p->d.s_t) / 1000);
-}
-
-// return the time from the epoch in us
-unsigned long long	ft_stime(void)
-{
-	struct timeval		tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000000 + tv.tv_usec);
-}
+#include"../philo_bonus.h"
 
 void	ft_usleep(unsigned long a)
 {
@@ -41,7 +26,22 @@ void	ft_usleep(unsigned long a)
 	}
 }
 
+// return the time from the epoch in us
+unsigned long long	ft_stime(void)
+{
+	struct timeval		tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000000 + tv.tv_usec);
+}
+
 int	ft_is_alive(t_philo *p)
 {
-	return (((ft_stime() - p -> l_eat) <= p ->d.t_alive * 1000) || (!p->d.t_meat && !p->d.inf));
+	return (((ft_stime() - p -> l_eat) <= p->d->t_alive * 1000));
+}
+
+// Retun the moment in ms
+int	ft_moment(t_philo *p)
+{
+	return ((ft_stime() - p->d->s_t));
 }

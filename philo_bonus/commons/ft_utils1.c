@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_long_atoi.c                                     :+:      :+:    :+:   */
+/*   ft_utils1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 15:59:48 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/25 22:39:32 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/04/05 14:41:20 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/05 15:01:25 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../header.h"
+#include"../philo_bonus.h"
 
-static	size_t	ret_nbr(char *tmp)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_print(char *c)
+{
+	write(1, c, ft_strlen(c));
+}
+
+void	ft_putnbr(long long n)
+{
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+	}
+	ft_putchar((n % 10) + '0');
+}
+
+size_t	ret_nbr(char *tmp)
 {
 	int				i;
 	unsigned long	res;

@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_utils.c                                      :+:      :+:    :+:   */
+/*   ft_lst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 22:53:39 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/26 01:28:06 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/02/12 16:36:06 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/05 14:56:03 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../header.h"
+#include"../../philo_bonus.h"
 
-void	ft_exit(char *str, int stat)
+void	ft_enumerate(t_philo **p)
 {
-	write(1, str, ft_strlen(str));
-	write(1, "\n", stat);
-	exit(1);
+	t_philo	*l;
+	int		i;
+
+	i = 0;
+	l = *p;
+	while (l)
+	{
+		l -> p_id = getpid();
+		l -> id = ++i;
+		l = l -> prev;
+	}
+}
+
+void	ft_circulare(t_philo **p)
+{
+	t_philo	*l;
+	t_philo	*end;
+
+	l = *p;
+	end = ft_lst_get_end(l);
+	l -> next = end;
+	if (end)
+		end -> prev = l;
 }

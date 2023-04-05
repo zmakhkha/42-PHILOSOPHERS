@@ -6,11 +6,11 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:30:30 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/25 22:40:50 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:55:53 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../header.h"
+#include"../../philo_bonus.h"
 
 t_philo	*ft_lst_get_end(t_philo *list)
 {

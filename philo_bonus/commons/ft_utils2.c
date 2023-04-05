@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_addback.c                                   :+:      :+:    :+:   */
+/*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 11:31:35 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/25 22:40:36 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/04/05 14:43:53 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/05 14:45:16 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../header.h"
+#include"../philo_bonus.h"
 
-void	ft_lstadd_back(t_philo **lst, t_philo *new)
+int	ft_isdigit(int c)
 {
-	t_philo	*pos;
+	return ((48 <= c) && (c <= 57));
+}
 
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		pos = *lst;
-		while (pos -> prev != NULL)
-			pos = pos -> prev;
-		pos -> prev = new;
-		new ->next = pos;
-	}
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_print_error(char *str, int status)
+{
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
+	exit (status);
+}
+
+void	ft_exit(char *str, int stat)
+{
+	write(1, str, ft_strlen(str));
+	write(1, "\n", stat);
+	exit(1);
 }
