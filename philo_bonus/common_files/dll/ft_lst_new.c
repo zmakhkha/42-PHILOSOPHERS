@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_get_end.c                                   :+:      :+:    :+:   */
+/*   ft_lst_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 11:30:30 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/05 14:55:53 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/02/12 11:28:10 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/07 15:51:50 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../philo_bonus.h"
 
-t_philo	*ft_lst_get_end(t_philo *list)
+t_philo	*ft_lstnew(void)
 {
-	t_philo	*tmp;
+	t_philo	*new;
 
-	if (list)
-	{
-		if (!list -> prev)
-			return (list);
-		tmp = list;
-		while (list -> prev)
-		{
-			tmp = list;
-			list = list ->prev;
-		}
-		return (tmp -> prev);
-	}
-	return (NULL);
+	new = (t_philo *) malloc(sizeof(t_philo));
+	if (!new)
+		return (NULL);
+	new -> next = NULL;
+	new -> prev = NULL;
+	return (new);
 }

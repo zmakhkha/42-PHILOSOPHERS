@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_addback.c                                   :+:      :+:    :+:   */
+/*   ft_lst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 11:31:35 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/05 14:55:43 by zmakhkha         ###   ########.fr       */
+/*   Created: 2023/02/12 16:36:06 by zmakhkha          #+#    #+#             */
+/*   Updated: 2023/04/07 15:51:53 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../philo_bonus.h"
 
-void	ft_lstadd_back(t_philo **lst, t_philo *new)
+void	ft_enumerate(t_philo **p)
 {
-	t_philo	*pos;
+	t_philo	*l;
+	int		i;
 
-	if (*lst == NULL)
-		*lst = new;
-	else
+	i = 0;
+	l = *p;
+	while (l)
 	{
-		pos = *lst;
-		while (pos -> prev != NULL)
-			pos = pos -> prev;
-		pos -> prev = new;
-		new ->next = pos;
+		l ->id = ++i;
+		l = l -> prev;
 	}
+}
+
+void	ft_circulare(t_philo **p)
+{
+	t_philo	*l;
+	t_philo	*end;
+
+	l = *p;
+	end = ft_lst_get_end(l);
+	l -> next = end;
+	if (end)
+		end -> prev = l;
 }

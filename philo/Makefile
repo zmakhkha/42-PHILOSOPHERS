@@ -13,18 +13,18 @@ SRC_MN =	main.c \
 			common_files/ft_habbits.c \
 			common_files/ft_long_atoi.c \
 			common_files/ft_putnbr.c \
-			parsing/parsing_utils01.c \
+			common_files/parsing_utils.c
 
 OBJ = $(SRC_MN:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
 
 all: $(M_NAME)
 
 $(M_NAME) : $(OBJ)
-	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) -g -fsanitize=thread
+	$(CC)  $(CFLAGS) $(OBJ) -o $(M_NAME) 
 
 %.o:%.c common_files/philo.h
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/05 14:24:08 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:47:39 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_data	*ft_fill_it(int n, char **v)
 	p -> t_eat = ft_latoi(v[3]);
 	p -> t_sleep = ft_latoi(v[4]);
 	p -> inf = 1;
+	p -> n_meat = -1;
 	ft_init_mutex(p);
 	if (n == 6)
 	{
