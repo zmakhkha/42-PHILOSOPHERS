@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:32:54 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 02:42:01 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 14:30:09 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,14 @@ t_data	*ft_main_parsing(int n, char **v)
 	data -> t_alive = ft_latoi(v[2]);
 	data -> t_eat = ft_latoi(v[3]);
 	data -> t_sleep = ft_latoi(v[4]);
-	data -> inf = 1;
 	data -> n_meat = -1;
 	ft_initsem(data);
 	data->inf = 1;
 	if (n == 6)
 	{
+		data->n_meat = 0;
 		data->n_meat = ft_latoi(v[5]);
-		data->t_meat = data->n_meat * data->n_philo;
-		data->inf = 0;
 	}
-	data -> phil = malloc(sizeof(pid_t));
+	data -> phil = malloc(data->n_philo * sizeof(pid_t));
 	return (data);
 }

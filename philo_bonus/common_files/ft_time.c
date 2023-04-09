@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:46:26 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 02:13:04 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:50:35 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ int	ft_is_alive(t_philo *p)
 // Retun the moment in ms
 int	ft_moment(t_philo *p)
 {
-	return ((ft_stime() - p->d->s_t));
+	return ((ft_stime() - p->d->s_t) / 1000);
 }

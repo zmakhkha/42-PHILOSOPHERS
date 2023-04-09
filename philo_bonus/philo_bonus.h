@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 03:26:12 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 12:10:56 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 // Semaphores nominations
 # define FORKS	"forks"
 # define PRINT	"print"
+# define MEALS	"meals"
 
 // Shared Data Struct
 typedef struct s_data
@@ -38,6 +39,7 @@ typedef struct s_data
 	sem_t				*pr;
 	sem_t				*m_dead;
 	sem_t				*forks;
+	sem_t				*meals;
 	pid_t				*phil;
 
 	unsigned long		s_t;

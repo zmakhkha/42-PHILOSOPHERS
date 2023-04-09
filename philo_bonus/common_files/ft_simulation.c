@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:07:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 03:22:26 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:25:09 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ void	ft_eat(t_philo *p)
 		p->l_eat = ft_stime();
 		ft_eating(p, ft_moment(p));
 		ft_usleep(p ->d->t_eat);
-		p->d->t_meat--;
+		p->d->t_meat++;
+		if (p->d->n_meat == p->d->t_meat)
+		{
+			sem_post(p->d->forks);
+			sem_post(p->d->forks);
+			exit(0);
+		}
 		sem_post(p->d->forks);
 		sem_post(p->d->forks);
 	}
@@ -38,5 +44,4 @@ void	ft_routine(t_philo *p)
 		ft_thinking(p, ft_moment(p));
 	}
 	ft_dead(p, ft_moment(p));
-	exit(1);
 }
