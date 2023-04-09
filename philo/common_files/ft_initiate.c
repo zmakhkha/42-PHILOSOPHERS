@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:24:24 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/08 13:42:28 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:21:11 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ void	ft_fill_philo(t_philo **p, t_data *d)
 
 void	ft_ini_lst(t_philo **p, t_data *d)
 {
-	t_philo	*l;
 	int		i;
 
 	i = -1;
 	while (++i < d->n_philo)
 		ft_lstadd_back(p, ft_lstnew());
-	l = *p;
 	ft_enumerate(p);
 	ft_circulare(p);
 	ft_fill_philo(p, d);

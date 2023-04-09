@@ -6,11 +6,19 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 14:47:57 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:55:34 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo_bonus.h"
+
+void	ft_close(t_data *data)
+{
+		sem_unlink(PRINT);
+		sem_close(data->pr);
+		sem_unlink(FORKS);
+		sem_close(data->forks);
+}
 
 void	ft_free(t_philo *lst)
 {
@@ -22,10 +30,9 @@ void	ft_free(t_philo *lst)
 	{
 		tmp = lst;
 		lst = lst->prev;
-		free(lst);
+		free(tmp);
 	}
 }
-
 void	ft_wait(t_philo *lst)
 {
 	int		i;
@@ -40,9 +47,15 @@ void	ft_wait(t_philo *lst)
 		{
 			j = -1;
 			while (++j < i)
+			{
+				ft_close(lst->d);
 				kill(lst->d->phil[j], SIGKILL);
+			}
 			while (++j < i)
+			{
+				ft_close(lst->d);				
 				kill(lst->d->phil[j], SIGKILL);
+			}
 			return ;
 		}
 		if (!lst->d->phil[i])
@@ -54,11 +67,6 @@ void	ft_wait(t_philo *lst)
 		}
 	}
 }
-
-// void	s(void)
-// {
-// 	system(" leaks philo_bonus");
-// }
 
 int	main(int n, char **v)
 {
@@ -84,6 +92,9 @@ int	main(int n, char **v)
 			lst = lst->prev;
 		}
 	}
+	ft_close(shared);
 	ft_wait(lst);
+	ft_free(lst);
+	free(shared);
 	return (0);
 }

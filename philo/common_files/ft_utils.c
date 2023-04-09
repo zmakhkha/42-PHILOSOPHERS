@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 10:56:50 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/03/05 21:34:31 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:20:43 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ unsigned long long	ft_stime(void)
 
 void	ft_usleep(unsigned long a)
 {
-	unsigned long long	t_daba;
 	unsigned long long	t_alarm;
 	unsigned long long	b;
 
 	b = 0;
-	t_daba = ft_stime();
 	t_alarm = ft_stime() + (a * 1000);
 	while (b < t_alarm)
 	{

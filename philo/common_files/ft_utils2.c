@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:30:40 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 14:47:39 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:20:57 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ static void	ft_init_mutex(t_data *p)
 t_data	*ft_fill_it(int n, char **v)
 {
 	t_data	*p;
-	int		a;
 
-	a = 0;
 	p = (t_data *)malloc (sizeof(t_data));
 	if (!p)
 		return (NULL);
