@@ -18,7 +18,7 @@ OBJ = $(SRC_MN:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -pthread # -g -fsanitize=address,undefined
 
 all: $(M_NAME)
 

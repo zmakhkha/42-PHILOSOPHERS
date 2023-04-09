@@ -6,12 +6,11 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:08:31 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 16:02:07 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 03:33:05 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../philo_bonus.h"
-
 
 void	ft_fork(t_philo *p, unsigned long long time)
 {
@@ -26,24 +25,32 @@ void	ft_fork(t_philo *p, unsigned long long time)
 
 void	ft_eating(t_philo *p, unsigned long long time)
 {
-	sem_wait(p->d->pr);
-	ft_putnbr(time);
-	ft_putchar(' ');
-	ft_putnbr(p->id);
-	ft_putchar(' ');
-	ft_print("is eating\n");
-	sem_post(p->d->pr);
+	if (ft_is_alive(p))
+	{
+		sem_wait(p->d->pr);
+		ft_putnbr(ft_moment(p));
+		ft_putchar(' ');
+		ft_putnbr(p->id);
+		ft_putchar(' ');
+		ft_print("is eating\n");
+		sem_post(p->d->pr);
+	}
 }
 
 void	ft_sleeping(t_philo *p, unsigned long long time)
 {
-	sem_wait(p->d->pr);
-	ft_putnbr(time);
-	ft_putchar(' ');
-	ft_putnbr(p->id);
-	ft_putchar(' ');
-	ft_print("is sleeping\n");
-	sem_post(p->d->pr);
+	(void)time;
+	if (ft_is_alive(p))
+	{
+		sem_wait(p->d->pr);
+		ft_putnbr(time);
+		ft_putchar(' ');
+		ft_putnbr(p->id);
+		ft_putchar(' ');
+		ft_print("is sleeping\n");
+		sem_post(p->d->pr);
+		ft_usleep(p->d->t_sleep);
+	}
 }
 
 void	ft_thinking(t_philo *p, unsigned long long time)
@@ -52,7 +59,6 @@ void	ft_thinking(t_philo *p, unsigned long long time)
 	{
 		sem_wait(p->d->pr);
 		ft_putnbr(time);
-		// printf("%lld",time);
 		ft_putchar(' ');
 		ft_putnbr(p->id);
 		ft_putchar(' ');

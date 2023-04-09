@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 16:05:30 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 03:26:12 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdio.h>
-
+# include <pthread.h>
+# include <signal.h>
 
 // Status
 # define SUCC	0
@@ -37,6 +38,7 @@ typedef struct s_data
 	sem_t				*pr;
 	sem_t				*m_dead;
 	sem_t				*forks;
+	pid_t				*phil;
 
 	unsigned long		s_t;
 
@@ -57,6 +59,7 @@ typedef struct s_philo
 {
 	int					id;
 	pid_t				p_id;
+	pthread_t			philo;
 
 	unsigned long		l_sleep;
 	unsigned long		l_eat;
@@ -106,22 +109,21 @@ int					ft_moment(t_philo *p);
 
 // commons/ft_habits.c
 
-void	ft_fork(t_philo *p, unsigned long long time);
-void	ft_eating(t_philo *p, unsigned long long time);
-void	ft_sleeping(t_philo *p, unsigned long long time);
-void	ft_thinking(t_philo *p, unsigned long long time);
-void	ft_dead(t_philo *p, unsigned long long time);
+void				ft_fork(t_philo *p, unsigned long long time);
+void				ft_eating(t_philo *p, unsigned long long time);
+void				ft_sleeping(t_philo *p, unsigned long long time);
+void				ft_thinking(t_philo *p, unsigned long long time);
+void				ft_dead(t_philo *p, unsigned long long time);
 
 // commons/ft_simulation.c
 
-void	ft_eat(t_philo *p);
-void	ft_routine(t_philo *p);
+void				ft_eat(t_philo *p);
+void				ft_routine(t_philo *p);
 
 // commons/ft_philo.c
 
-void	ft_fill_philo(t_philo **p, t_data *d);
-void	ft_init_philo(t_philo **p, t_data *d);
-void	ft_start(t_philo *lst);
-
+void				ft_fill_philo(t_philo **p, t_data *d);
+void				ft_init_philo(t_philo **p, t_data *d);
+void				ft_start(t_philo *a);
 
 #endif

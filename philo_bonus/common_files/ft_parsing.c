@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:32:54 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/05 14:52:11 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 02:42:01 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,19 @@ t_data	*ft_main_parsing(int n, char **v)
 	t_data	*data;
 
 	data = NULL;
-	data = malloc(sizeof(t_data *));
+	data = malloc(sizeof(t_data));
 	if (!data)
 		ft_exit("ALLOCATION PROBLEM !!", 1);
 	if (n < 5 || n > 6)
 		ft_exit("Wrong Parameters !!", 1);
 	if (ft_valid_args(n, v) == ERR)
 		ft_exit("Arguments problem !!", 1);
-	data->n_philo = ft_latoi(v[1]);
-	data->t_alive = ft_latoi(v[2]);
-	data->t_eat = ft_latoi(v[3]);
-	data->t_sleep = ft_latoi(v[4]);
+	data -> n_philo = ft_latoi(v[1]);
+	data -> t_alive = ft_latoi(v[2]);
+	data -> t_eat = ft_latoi(v[3]);
+	data -> t_sleep = ft_latoi(v[4]);
+	data -> inf = 1;
+	data -> n_meat = -1;
 	ft_initsem(data);
 	data->inf = 1;
 	if (n == 6)
@@ -101,5 +103,6 @@ t_data	*ft_main_parsing(int n, char **v)
 		data->t_meat = data->n_meat * data->n_philo;
 		data->inf = 0;
 	}
+	data -> phil = malloc(sizeof(pid_t));
 	return (data);
 }

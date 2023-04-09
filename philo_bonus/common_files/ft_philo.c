@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:05:05 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 16:07:26 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 03:22:23 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ void	ft_init_philo(t_philo **p, t_data *d)
 	ft_fill_philo(p, d);
 }
 
-void	ft_start(t_philo *lst)
+void	ft_start(t_philo *p)
 {
-	lst->l_eat = lst->d->s_t;
-	lst->l_sleep = lst->d->s_t;
-	ft_routine(lst);
+	p->d->s_t = ft_stime();
+	p->l_eat = p->d->s_t;
+	p->l_sleep = p->d->s_t;
+	ft_routine(p);
 }
