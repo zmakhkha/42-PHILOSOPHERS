@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 16:36:58 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:34:24 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_data	*ft_ini_data(int n, char **v)
 
 static int	ft_main(t_data *shared, t_philo *lst)
 {
-	int				i;
+	int	i;
 
 	i = -1;
 	shared->s_t = ft_stime();
@@ -46,10 +46,7 @@ static int	ft_main(t_data *shared, t_philo *lst)
 		usleep(100);
 		pthread_mutex_lock(&shared->m_dead);
 		if (shared->dead == 1 || ((shared->t_meat == 0) && (shared->inf == 0)))
-		{
-			ft_putnbr(shared->t_meat);
-			break ;
-		}
+			return (0);
 		pthread_mutex_unlock(&shared->m_dead);
 	}
 	pthread_mutex_unlock(&shared->m_dead);

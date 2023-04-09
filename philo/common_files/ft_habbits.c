@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:37:06 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/07 16:31:46 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:35:04 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ void	ft_eat(t_philo *p)
 		ft_fork(p, ft_moment(p));
 		p->l_eat = ft_stime();
 		ft_eating(p, ft_moment(p));
+		ft_usleep(p ->d->t_eat);
 		pthread_mutex_lock(&(p->d->m_dead));
 		p->d->t_meat--;
-		write(1, "\n\n", 2);
-		ft_putnbr(p->d->t_meat);
-		write(1, "\n\n", 2);
 		pthread_mutex_unlock(&(p->d->m_dead));
-		ft_usleep(p ->d->t_eat);
 		pthread_mutex_unlock(&(p-> prev ->r_fork));
 		pthread_mutex_unlock(&(p->r_fork));
 	}
