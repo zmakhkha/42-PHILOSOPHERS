@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 08:55:34 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:52:41 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_close(t_data *data)
 {
-		sem_unlink(PRINT);
-		sem_close(data->pr);
-		sem_unlink(FORKS);
-		sem_close(data->forks);
+	sem_unlink(PRINT);
+	sem_close(data->pr);
+	sem_unlink(FORKS);
+	sem_close(data->forks);
 }
 
 void	ft_free(t_philo *lst)
@@ -33,6 +33,7 @@ void	ft_free(t_philo *lst)
 		free(tmp);
 	}
 }
+
 void	ft_wait(t_philo *lst)
 {
 	int		i;
@@ -47,22 +48,16 @@ void	ft_wait(t_philo *lst)
 		{
 			j = -1;
 			while (++j < i)
-			{
-				ft_close(lst->d);
 				kill(lst->d->phil[j], SIGKILL);
-			}
-			while (++j < i)
-			{
-				ft_close(lst->d);				
+			while (++j < lst->d->n_philo)
 				kill(lst->d->phil[j], SIGKILL);
-			}
 			return ;
 		}
 		if (!lst->d->phil[i])
 			lst = lst->prev;
 		else
 		{
-			kill(lst->p_id, SIGKILL);
+			kill(lst->d->phil[i], SIGKILL);
 			lst = lst->prev;
 		}
 	}
@@ -94,7 +89,5 @@ int	main(int n, char **v)
 	}
 	ft_close(shared);
 	ft_wait(lst);
-	ft_free(lst);
-	free(shared);
 	return (0);
 }
