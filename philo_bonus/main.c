@@ -6,31 +6,27 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/10 22:52:41 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:21:13 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo_bonus.h"
 
-void	ft_close(t_data *data)
-{
-	sem_unlink(PRINT);
-	sem_close(data->pr);
-	sem_unlink(FORKS);
-	sem_close(data->forks);
-}
-
 void	ft_free(t_philo *lst)
 {
 	int		i;
+	int		n;
 	t_philo	*tmp;
 
+	n = lst->d->n_philo;
+	free(lst->d->phil);
+	free(lst->d);
 	i = -1;
-	while (++i < lst->d->n_philo)
+	while (lst && ++i < n)
 	{
-		tmp = lst;
-		lst = lst->prev;
-		free(tmp);
+		tmp = lst->prev;
+		free(lst);
+		lst = tmp;
 	}
 }
 
@@ -43,7 +39,8 @@ void	ft_wait(t_philo *lst)
 	i = -1;
 	while (++i < lst->d->n_philo)
 	{
-		lst->d->phil[i] = waitpid(-1, &status, 0);
+		ft_usleep(200);
+		lst->d->phil[i] = waitpid(0, &status, 0);
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 10)
 		{
 			j = -1;
@@ -53,23 +50,27 @@ void	ft_wait(t_philo *lst)
 				kill(lst->d->phil[j], SIGKILL);
 			return ;
 		}
-		if (!lst->d->phil[i])
-			lst = lst->prev;
-		else
-		{
+		if (lst->d->phil[i])
 			kill(lst->d->phil[i], SIGKILL);
-			lst = lst->prev;
-		}
+		lst = lst->prev;
 	}
 }
 
-int	main(int n, char **v)
+void	ft_finish(t_philo *lst)
+{
+	ft_close(lst->d);
+	ft_wait(lst);
+	ft_free(lst);
+}
+
+int	_main(int n, char **v)
 {
 	t_data	*shared;
 	t_philo	*lst;
 	int		i;
 
 	shared = NULL;
+	lst = NULL;
 	shared = ft_main_parsing(n, v);
 	ft_init_philo(&lst, shared);
 	i = -1;
@@ -82,12 +83,13 @@ int	main(int n, char **v)
 		if (shared->phil[i] == 0)
 			ft_start(lst);
 		else
-		{
-			lst ->p_id = shared->phil[i];
 			lst = lst->prev;
-		}
 	}
-	ft_close(shared);
-	ft_wait(lst);
+	ft_finish(lst);
 	return (0);
+}
+
+int	main(int n, char **v)
+{
+	_main(n, v);
 }

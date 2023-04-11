@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:18:17 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 00:34:24 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:27:51 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ static int	ft_main(t_data *shared, t_philo *lst)
 	return (0);
 }
 
-int	main(int n, char **v)
+int	_main(int n, char **v)
 {
 	t_philo			*lst;
 	t_data			*shared;
 	int				i;
 
+	shared = NULL;
 	shared = ft_ini_data(n, v);
 	if (!shared)
 		return (ft_print("Error !!!"), 1);
@@ -75,4 +76,9 @@ int	main(int n, char **v)
 		lst = lst->prev;
 	}	
 	return (0);
+}
+
+int	main(int n, char **v)
+{
+	_main(n, v);
 }

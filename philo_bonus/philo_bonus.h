@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:15:49 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 08:29:21 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:19:47 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include <pthread.h>
 # include <signal.h>
 
 // Status
@@ -103,6 +102,7 @@ int					ft_isdigit(int c);
 size_t				ft_strlen(const char *s);
 void				ft_print_error(char *str, int status);
 void				ft_exit(char *str, int stat);
+void				ft_close(t_data *data);
 
 // commons/ft_time.c
 

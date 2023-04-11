@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:05:05 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/09 12:05:34 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:13:11 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ void	ft_start(t_philo *p)
 {
 	p->l_eat = p->d->s_t;
 	p->l_sleep = p->d->s_t;
+	if (p->d->n_philo == 1)
+		ft_dead(p, ft_moment(p));
 	ft_routine(p);
 }

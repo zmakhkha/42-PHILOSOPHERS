@@ -6,7 +6,7 @@
 /*   By: zmakhkha <zmakhkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:43:53 by zmakhkha          #+#    #+#             */
-/*   Updated: 2023/04/05 14:45:16 by zmakhkha         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:19:54 by zmakhkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ void	ft_exit(char *str, int stat)
 	write(1, str, ft_strlen(str));
 	write(1, "\n", stat);
 	exit(1);
+}
+
+void	ft_close(t_data *data)
+{
+	sem_unlink(PRINT);
+	sem_close(data->pr);
+	sem_unlink(FORKS);
+	sem_close(data->forks);
 }
